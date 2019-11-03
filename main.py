@@ -7,20 +7,23 @@ from pybricks.parameters import (Port, Stop, Direction, Button, Color,
                                  SoundFile, ImageFile, Align)
 from pybricks.tools import print, wait, StopWatch
 from pybricks.robotics import DriveBase
+from simple_pid import PID
+
 from sandwichbot import SandwichBot
 
 # Write your program here
 bot = SandwichBot()
 
-max_reflection = 0
-min_reflection = 100
-bot.left_motor.reset_angle(0)
+max_reflection = 24
+min_reflection = 0
+target_reflection = (max_reflection - min_reflection) / 2
+stop_watch = StopWatch()
+pid = PID(-5.0, -2.5, 0, target_reflection, 0.01)
+pid.output_limits = (-45, 45)
 
-while bot.left_motor.angle() < 360:
+while not any(brick.buttons()):
     reflection = bot.color_sensor.reflection()
-    if reflection > max_reflection:
-        max_reflection = reflection
-    if reflection < min_reflection:
-        min_reflection = reflection
-    bot.drive(50, 0)
-    print('reflection:', reflection, ', max_reflection: ', max_reflection, ', min_reflection: ', min_reflection)
+    angle = pid(reflection)
+    bot.drive(50, angle)
+    print(stop_watch.time(), ' -- reflection:', reflection, ', angle: ', angle, ', error: ', (reflection-target_reflection))
+    wait(100)
