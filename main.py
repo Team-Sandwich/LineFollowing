@@ -25,15 +25,16 @@ def measure_values(drive_base, color_sensor):
 
 def follow_line(drive_base, color_sensor):
     lastError = error = integral = 0
-    reflection_min = 1
-    reflection_max = 91
-    target = (reflection_max + reflection_min) / 2
+    reflection_min = 4  # on black
+    reflection_max = 91 # on white
+    # target = (reflection_max + reflection_min) / 2
+    target = 20
     kp = float(0.85)
     kd = 1
     ki = float(0.03)
     direction = 1
-    speed_mm_per_sec = 50
-    duration_in_ms = 65
+    speed_mm_per_sec = 60
+    duration_in_ms = 60
 
     while True:
         reflection = color_sensor.reflection()
@@ -48,6 +49,7 @@ def follow_line(drive_base, color_sensor):
         brick.display.text("s: {:.1f}, e: {:.1f}".format(steering, error))
         robot_sandwich_bob.drive_time(speed_mm_per_sec, steering, duration_in_ms) # 10Hz
 
+# settings for XRay robot
 motor_a = Motor(Port.A)
 motor_b = Motor(Port.B)
 wheelDia_in_mm = 40
