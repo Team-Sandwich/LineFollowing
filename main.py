@@ -14,18 +14,20 @@ from sandwichbot import SandwichBot
 # Write your program here
 bot = SandwichBot()
 
-max_reflection = 77
-min_reflection = 4
+max_reflection = 94
+min_reflection = 12
 target_reflection = (max_reflection - min_reflection) / 2
 stop_watch = StopWatch()
-pid = PID(-5.0, -2.5, 0, target_reflection, 0.01)
+pid = PID(-1.0, -.25, 0.0, target_reflection, 0.01)
 pid.output_limits = (-45, 45)
+last_angle = 0
+
 last_angle = 0
 
 while not any(brick.buttons()):
     reflection = bot.color_sensor.reflection()
     angle = pid(reflection)
-    if angle != last_angle:
+    if last_angle != angle:
         bot.drive(50, angle)
-        print(stop_watch.time(), ' -- reflection:', reflection, ', angle: ', angle, ', error: ', (reflection-target_reflection))
         last_angle = angle
+        print(stop_watch.time(), ' -- reflection:', reflection, ', angle: ', angle, ', error: ', (reflection-target_reflection))

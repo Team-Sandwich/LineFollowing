@@ -15,7 +15,6 @@ bot = SandwichBot()
 
 max_reflection = 0
 min_reflection = 100
-bot.left_motor.reset_angle(0)
 stop_watch = StopWatch()
 
 while stop_watch.time() < 2000:
