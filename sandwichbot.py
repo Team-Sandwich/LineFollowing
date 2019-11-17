@@ -8,11 +8,11 @@ from pybricks.robotics import DriveBase
 from behaviors.follow_line_behavior import FollowLineBehavior
 
 class SandwichBot(DriveBase):
-    def __init__(self, left_motor=Motor(Port.A), right_motor=Motor(Port.B), wheel_diameter=56, axle_track=114):
+    def __init__(self, left_motor=Motor(Port.A), right_motor=Motor(Port.B), wheel_diameter=56, axle_track=110):
         self.left_motor = left_motor
         self.right_motor = right_motor
         self.color_sensor = ColorSensor(Port.S2)
-        self.gyro_sensor = GyroSensor(Port.S1)
+        # self.gyro_sensor = GyroSensor(Port.S1)
         super().__init__(left_motor, right_motor, wheel_diameter, axle_track)
 
     def follow_line(self, until):
