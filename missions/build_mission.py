@@ -12,3 +12,14 @@ class BuildMission():
     def run(self):
         brick.sound.beep()
         print("Run Build Mission")
+        turn_to = TurnToAngleBehavior(bot, bot.gyro_sensor)
+        turn_to.run(-11)
+
+        target_distance = 1237
+        bot.left_motor.reset_angle(0)
+
+        while bot.left_motor.angle() < target_distance:
+            self.bot.drive(150, 0)
+
+        while bot.left_motor.angle() > -340:
+            self.bot.drive(-500, 0)
