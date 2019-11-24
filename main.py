@@ -16,8 +16,6 @@ bot = SandwichBot()
 # Clear the display
 brick.display.clear()
 
-time = StopWatch()
-
 missions = [BuildMission, SwingMission, CraneMission, RampMission]
 selected_mission_index = 0
 current_mission_index = 0
