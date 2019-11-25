@@ -10,9 +10,10 @@ from behaviors.turn_to_angle_behavior import TurnToAngleBehavior
 from behaviors.drive_distance import DriveDistanceBehavior
 
 class SandwichBot(DriveBase):
-    def __init__(self, left_motor=Motor(Port.A), right_motor=Motor(Port.B), wheel_diameter=56, axle_track=110):
+    def __init__(self, left_motor=Motor(Port.A), right_motor=Motor(Port.B), attachment_motor=(Motor(Port.C)), wheel_diameter=56, axle_track=110):
         self.left_motor = left_motor
         self.right_motor = right_motor
+        self.attachment_motor = attachment_motor
         self.color_sensor = ColorSensor(Port.S2)
         self.gyro_sensor = GyroSensor(Port.S1)
         super().__init__(left_motor, right_motor, wheel_diameter, axle_track)

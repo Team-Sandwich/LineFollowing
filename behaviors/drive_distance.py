@@ -13,5 +13,15 @@ class DriveDistanceBehavior:
     def run(self, distance:int, speed:int):
         self.motor.reset_angle(0)
 
-        while self.motor.angle() < distance:
-            self.bot.drive(200, 0)
+        while not self.__at_target(distance, self.motor):
+            if distance >= 0:
+                self.bot.drive(speed, 0)
+            else:
+                self.bot.drive(-speed, 0)
+            print("Drive Distance -- target: ", distance, ", distance: ", self.motor.angle())
+
+    def __at_target(self, distance:int, motor) -> bool:
+        if distance >= 0:
+            return self.motor.angle() > distance
+        else:
+            return self.motor.angle() < distance

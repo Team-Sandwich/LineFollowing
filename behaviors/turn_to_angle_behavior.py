@@ -26,8 +26,10 @@ class TurnToAngleBehavior:
     def run(self, angle):
         stop_watch = StopWatch()
         self.pid.setpoint = angle
+        self.gyro_sensor.reset_angle(0)
         last_angle = angle + 100
         last_rotation = 0
+
 
         while not abs(self.pid.setpoint - last_angle) < 0.25:
             angle = self.gyro_sensor.angle()
