@@ -24,7 +24,6 @@ brick.display.image(missions[0].IMAGE_PATH)
 
 last_buttons_pressed = set()
 
-
 while True:
     valid_index = selected_mission_index % len(missions)
     buttons_released = last_buttons_pressed - set(brick.buttons())
