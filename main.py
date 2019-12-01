@@ -10,7 +10,7 @@ from missions.crane_mission import CraneMission
 from missions.ramp_mission import RampMission
 from missions.swing_mission import SwingMission
 
-# Write your program here
+
 bot = SandwichBot()
 
 # Clear the display
@@ -22,40 +22,38 @@ current_mission_index = 0
 brick.display.clear()
 brick.display.image(missions[0].IMAGE_PATH)
 
-button_down_active = False
-button_up_active = False
-button_center_active = False
+last_buttons_pressed = set()
+
 
 while True:
     valid_index = selected_mission_index % len(missions)
+    buttons_released = last_buttons_pressed - set(brick.buttons())
+    last_buttons_pressed = set(brick.buttons())
+
     if valid_index != current_mission_index:
         selected_mission = missions[valid_index]
         brick.display.clear()
         brick.display.image(selected_mission.IMAGE_PATH)
         current_mission_index = valid_index
 
-    if Button.DOWN in brick.buttons():
-        button_down_active = True
-    if button_down_active == True and Button.DOWN not in brick.buttons():
+    if Button.DOWN in buttons_released:
         selected_mission_index -= 1
-        button_down_active = False
-    if Button.UP in brick.buttons():
-        button_up_active = True
-    if button_up_active == True and Button.UP not in brick.buttons():
+
+    if Button.UP in buttons_released:
         selected_mission_index += 1
-        button_up_active = False
-    if Button.CENTER in brick. buttons():
-        button_center_active =  True
-    if button_center_active== True and Button.CENTER not in brick.buttons():
+
+    if Button.CENTER in buttons_released:
         mission = missions[valid_index](bot)
         mission.run()
-        button_center_active = False
-    if Button.LEFT in brick.buttons():
-        print("Button.LEFT")
-        bot.attachment_motor.run_time(-360*3, 100, Stop.COAST)
-        wait(100)
-    if Button.RIGHT in brick.buttons():
-        print("Button.RIGHT")
-        bot.attachment_motor.run_time(360*3, 100, Stop.COAST)
-        wait(100)
 
+    if Button.LEFT in brick.buttons():
+        bot.attachment_motor.run(-360)
+        
+    if Button.LEFT in buttons_released:
+        bot.attachment_motor.stop()
+
+    if Button.RIGHT in brick.buttons():
+        bot.attachment_motor.run(360)
+
+    if Button.RIGHT in buttons_released:
+        bot.attachment_motor.stop()
