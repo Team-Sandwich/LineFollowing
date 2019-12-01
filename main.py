@@ -1,7 +1,7 @@
 #!/usr/bin/env pybricks-micropython
 
 from pybricks import ev3brick as brick
-from pybricks.parameters import (Button)
+from pybricks.parameters import (Button, Stop)
 from pybricks.tools import print, wait, StopWatch
 
 from sandwichbot import SandwichBot
@@ -50,3 +50,12 @@ while True:
         mission = missions[valid_index](bot)
         mission.run()
         button_center_active = False
+    if Button.LEFT in brick.buttons():
+        print("Button.LEFT")
+        bot.attachment_motor.run_time(-360*3, 100, Stop.COAST)
+        wait(100)
+    if Button.RIGHT in brick.buttons():
+        print("Button.RIGHT")
+        bot.attachment_motor.run_time(360*3, 100, Stop.COAST)
+        wait(100)
+

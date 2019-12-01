@@ -29,3 +29,4 @@ class SandwichBot(DriveBase):
     def drive_distance(self, distance, speed):
         drive_distance = DriveDistanceBehavior(self, self.left_motor)
         drive_distance.run(distance, speed)
+        self.stop()
