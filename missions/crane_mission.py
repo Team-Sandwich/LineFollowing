@@ -16,7 +16,8 @@ class CraneMission():
 
         self.bot.drive_distance(775,100)
         self.bot.attachment_motor.run_angle(360*3, -360*2, Stop.BRAKE, True)
-        wait(1000)
+        wait(300)
         self.bot.attachment_motor.run_angle(360*3, 360*2, Stop.BRAKE, True)
         self.bot.turn_to(90)
+        self.bot.attachment_motor.run_angle(360*3, -360*5, Stop.BRAKE, False)
         self.bot.drive_distance(-1000, 200)

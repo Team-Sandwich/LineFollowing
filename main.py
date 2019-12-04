@@ -6,6 +6,7 @@ from pybricks.tools import print, wait, StopWatch
 
 from sandwichbot import SandwichBot
 from missions.build_mission import BuildMission
+from missions.build2_mission import Build2Mission
 from missions.crane_mission import CraneMission
 from missions.ramp_mission import RampMission
 from missions.swing_mission import SwingMission
