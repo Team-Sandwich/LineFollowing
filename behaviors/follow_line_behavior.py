@@ -4,10 +4,14 @@ from pybricks.robotics import DriveBase
 from simple_pid import PID
 
 class FollowLineBehavior:
+    """
+    Behavior class to drive two powered wheels following a line using the color sensor.
+    """
+
     PROPORTIONAL = -1.0
     INTEGRAL = -.25
     DERIVATIVE = 0.0
-    UPDATE_INTERVAL = 0.01
+    UPDATE_INTERVAL = None
 
     def __init__(self, bot:DriveBase, color_sensor:ColorSensor):
         self.bot = bot
