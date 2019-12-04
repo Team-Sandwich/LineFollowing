@@ -4,6 +4,9 @@ from pybricks.robotics import DriveBase
 from simple_pid import PID
 
 class DriveDistanceBehavior:
+    """
+    Behavior class to drive two powered wheels a measured distance.
+    """
 
     def __init__(self, bot:DriveBase, motor:Motor):
         self.bot = bot
@@ -11,6 +14,14 @@ class DriveDistanceBehavior:
         super().__init__()
 
     def run(self, distance:int, speed:int):
+        """
+        Start driving straight at the specified distance and speed.
+
+        ----------
+        distance : float – distance measured using motor watch value.
+
+        speed : float – Forward speed of the robot (mm/s).
+        """
         self.motor.reset_angle(0)
 
         while not self.__at_target(distance, self.motor):

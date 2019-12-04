@@ -14,7 +14,8 @@ class BuildMission():
         print("Run Build Mission")
         self.bot.turn_to(-5)
         self.bot.drive_distance(1237,100)
-        self.bot.drive_distance(-1900, 100)
+        self.bot.drive_distance(-300,100)
+        self.bot.drive_distance(-1600, 400)
 
         
 
