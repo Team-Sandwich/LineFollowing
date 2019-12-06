@@ -4,14 +4,19 @@ from pybricks.parameters import Stop
 from sandwichbot import SandwichBot
 
 class SwingMission():
+    """
+    Class to tackle Swing Mission.
+    """
     IMAGE_PATH = "assets/swing.jpg"
 
     def __init__(self, bot:SandwichBot):
         self.image_path = SwingMission.IMAGE_PATH
         self.bot = bot
 
-    # starting the swing & eleavator missions
     def run(self):
+        """
+        Start the swing mission.
+        """
         brick.sound.beep()
         print("Run Swing Mission")
 
@@ -20,7 +25,8 @@ class SwingMission():
         self.bot.attachment_motor.run_angle(360*3, -360*3, Stop.BRAKE, False)
 
         # driving to swing
-        self.bot.drive_distance(1647, 120)
+        self.bot.drive_distance(847, 120)
+        self.bot.follow_line_distance(True, 847)
         self.bot.stop(Stop.BRAKE)
         self.bot.turn_to(58)
         self.bot.drive_distance(210, 75)
@@ -39,5 +45,3 @@ class SwingMission():
 
         self.bot.attachment_motor.run_angle(360*3, -360*2, Stop.BRAKE, False)
         self.bot.drive_distance(-3000, 400)
-
-        

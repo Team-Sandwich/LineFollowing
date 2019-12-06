@@ -28,12 +28,12 @@ class TurnToAngleBehavior:
     def __configure_pid(self):
         self.pid.output_limits = (-45, 45)
 
-    def run(self, angle):
+    def run(self, angle:int):
         """
         Start turing in place for a specified angle.
 
         ----------
-        angle : float – angle to turn (clockwise - positive).
+        angle : int – angle to turn (clockwise - positive).
         """
         stop_watch = StopWatch()
         self.pid.setpoint = angle

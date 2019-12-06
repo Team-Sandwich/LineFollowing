@@ -22,34 +22,44 @@ class SandwichBot(DriveBase):
         self.gyro_sensor = GyroSensor(Port.S1)
         super().__init__(left_motor, right_motor, wheel_diameter, axle_track)
 
-    def follow_line(self, until):
+    def follow_line_distance(self, use_left_edge:bool, distance:int):
+        """
+        Follow black line for a given distance.
+
+        ----------
+        distance : int - measured using angular rotation of the wheel (+/- : forward/backward).
+        """
+        follow_line = FollowLineBehavior(self, self.color_sensor, use_left_edge, self.left_motor)
+        follow_line.run_distance(distance)
+
+    def follow_line(self, use_left_edge:bool, until):
         """
         Follow black line until a condition is met.
 
         ----------
-        angle : float – angle to turn (clockwise - positive).
+        until : .
         """
-        follow_line = FollowLineBehavior(self, self.color_sensor)
+        follow_line = FollowLineBehavior(self, self.color_sensor, use_left_edge, self.left_motor)
         follow_line.run(until)
 
-    def turn_to(self, angle):
+    def turn_to(self, angle:int):
         """
         Turn the robot for a given angle.
 
         ----------
-        angle : float – angle to turn (clockwise - positive).
+        angle : int – angle to turn (clockwise - positive).
         """
         turn_to = TurnToAngleBehavior(self, self.gyro_sensor)
         turn_to.run(angle)
 
-    def drive_distance(self, distance, speed):
+    def drive_distance(self, distance:int, speed:int):
         """
         Drive straight using both motors for a given distance and speed.
 
         ----------
-        distance : float – distance measured using motor watch value.
+        distance : int – distance measured using motor watch value.
 
-        speed : float – Forward speed of the robot (mm/s).
+        speed : int – Forward speed of the robot (mm/s).
         """
         drive_distance = DriveDistanceBehavior(self, self.left_motor)
         drive_distance.run(distance, speed)
