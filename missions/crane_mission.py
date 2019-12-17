@@ -4,6 +4,9 @@ from pybricks.parameters import Stop
 from sandwichbot import SandwichBot
 
 class CraneMission():
+    """
+    Class to release crane.
+    """
     IMAGE_PATH = "assets/crane.jpg"
 
     def __init__(self, bot:SandwichBot):
@@ -16,8 +19,10 @@ class CraneMission():
 
         self.bot.drive_distance(775,100)
         self.bot.attachment_motor.run_angle(360*3, -360*2, Stop.BRAKE, True)
-        wait(300)
         self.bot.attachment_motor.run_angle(360*3, 360*2, Stop.BRAKE, True)
-        self.bot.turn_to(90)
+
+        self.bot.drive_time(-100,75,1000)
+        # self.bot.turn_to(90)
+
         self.bot.attachment_motor.run_angle(360*3, -360*5, Stop.BRAKE, False)
         self.bot.drive_distance(-1000, 200)

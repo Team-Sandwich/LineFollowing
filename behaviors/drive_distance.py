@@ -29,7 +29,7 @@ class DriveDistanceBehavior:
                 self.bot.drive(speed, 0)
             else:
                 self.bot.drive(-speed, 0)
-            print("Drive Distance -- target: ", distance, ", distance: ", self.motor.angle())
+            #print("Drive Distance -- target: ", distance, ", distance: ", self.motor.angle())
 
     def __at_target(self, distance:int, motor) -> bool:
         if distance >= 0:

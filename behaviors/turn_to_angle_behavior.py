@@ -7,12 +7,11 @@ class TurnToAngleBehavior:
     """
     Behavior class to turn the powered wheels using gyro sensor.
     """
-    PROPORTIONAL = 1.0
-    INTEGRAL = -0.0
+    PROPORTIONAL = 1 # 0.70
+    INTEGRAL = 0 # 0.35
     DERIVATIVE = 0.0
     ACCURACY_ANGLE = 1
     UPDATE_INTERVAL = None
-    #UPDATE_INTERVAL = 0.01
 
     def __init__(self, bot:DriveBase, gyro_sensor:GyroSensor):
         self.bot = bot
@@ -35,6 +34,8 @@ class TurnToAngleBehavior:
         ----------
         angle : int – angle to turn (clockwise - positive).
         """
+        if angle < 0:
+            self.pid.tunings = (1, 0, 0)
         stop_watch = StopWatch()
         self.pid.setpoint = angle
         self.gyro_sensor.reset_angle(0)

@@ -10,11 +10,14 @@ from behaviors.turn_to_angle_behavior import TurnToAngleBehavior
 from behaviors.drive_distance import DriveDistanceBehavior
 
 class SandwichBot(DriveBase):
+    """
+    Class to define motors and sensors that the robot uses and what robot can perform.
+    """
     def __init__(self, left_motor=Motor(Port.A),
                     right_motor=Motor(Port.B),
                     attachment_motor=(Motor(Port.C)),
-                    #wheel_diameter=56, axle_track=110):
-                    wheel_diameter=43, axle_track=110):
+                    wheel_diameter=56, axle_track=145):
+                    #wheel_diameter=43, axle_track=110):
         self.left_motor = left_motor
         self.right_motor = right_motor
         self.attachment_motor = attachment_motor
@@ -22,24 +25,28 @@ class SandwichBot(DriveBase):
         self.gyro_sensor = GyroSensor(Port.S1)
         super().__init__(left_motor, right_motor, wheel_diameter, axle_track)
 
-    def follow_line_distance(self, use_left_edge:bool, distance:int):
+    def follow_line_distance(self, use_right_edge:bool, distance:int):
         """
         Follow black line for a given distance.
 
         ----------
-        distance : int - measured using angular rotation of the wheel (+/- : forward/backward).
+        use_right_edge : bool - set to True if follow the right edge of black line. For left, False.
+
+        distance : int - measured in angular rotation of the wheel (+/- : forward/backward).
         """
-        follow_line = FollowLineBehavior(self, self.color_sensor, use_left_edge, self.left_motor)
+        follow_line = FollowLineBehavior(self, self.color_sensor, use_right_edge, self.left_motor)
         follow_line.run_distance(distance)
 
-    def follow_line(self, use_left_edge:bool, until):
+    def follow_line(self, use_right_edge:bool, until):
         """
         Follow black line until a condition is met.
 
         ----------
+        use_right_edge : bool - set to True if follow the right edge of black line. For left, False.
+
         until : .
         """
-        follow_line = FollowLineBehavior(self, self.color_sensor, use_left_edge, self.left_motor)
+        follow_line = FollowLineBehavior(self, self.color_sensor, use_right_edge, self.left_motor)
         follow_line.run(until)
 
     def turn_to(self, angle:int):
@@ -57,9 +64,9 @@ class SandwichBot(DriveBase):
         Drive straight using both motors for a given distance and speed.
 
         ----------
-        distance : int – distance measured using motor watch value.
+        distance : int – distance measured in angular rotation of the wheel using motor watch value.
 
-        speed : int – Forward speed of the robot (mm/s).
+        speed : int – speed of the robot (mm/s).
         """
         drive_distance = DriveDistanceBehavior(self, self.left_motor)
         drive_distance.run(distance, speed)

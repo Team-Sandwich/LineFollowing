@@ -3,6 +3,9 @@ from pybricks.tools import print, wait, StopWatch
 from sandwichbot import SandwichBot
 
 class Build2Mission():
+    """
+    Class to send sandwich to black circle.
+    """
     IMAGE_PATH = "assets/build2.jpg"
 
     def __init__(self, bot:SandwichBot):
@@ -12,4 +15,6 @@ class Build2Mission():
     def run(self):
         brick.sound.beep()
         self.bot.drive_distance(900, 100)
-        self.bot.drive_distance(-900, 100)
+        self.bot.drive_distance(-300, 100)
+        self.bot.drive_time(-200,90,1000)
+        self.bot.drive_distance(-1000, 200)

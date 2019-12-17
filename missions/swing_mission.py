@@ -25,9 +25,13 @@ class SwingMission():
         self.bot.attachment_motor.run_angle(360*3, -360*3, Stop.BRAKE, False)
 
         # driving to swing
-        self.bot.drive_distance(847, 120)
-        self.bot.follow_line_distance(True, 847)
+        # self.bot.drive_distance(1647, 200)
+        # self.bot.stop(Stop.BRAKE)
+
+        self.bot.drive_distance(847, 200)
+        self.bot.follow_line_distance(True, 800)
         self.bot.stop(Stop.BRAKE)
+
         self.bot.turn_to(58)
         self.bot.drive_distance(210, 75)
         self.bot.stop(Stop.BRAKE)
@@ -36,12 +40,16 @@ class SwingMission():
         self.bot.stop(Stop.BRAKE)
         self.bot.drive_distance(-200, 75)
         self.bot.stop(Stop.BRAKE)
+
         brick.sound.beep()
+        brick.sound.beep(1000, 150, 50)
 
-        self.bot.turn_to(60)
+        self.bot.drive_time(-100,50,1200)
+        self.bot.drive_time(-100,-50,1000)
 
-        self.bot.drive_distance(-300, 120)
-        self.bot.turn_to(-60)
+        # self.bot.turn_to(60)
+        # self.bot.drive_distance(-300, 120)
+        # self.bot.turn_to(-60)
 
         self.bot.attachment_motor.run_angle(360*3, -360*2, Stop.BRAKE, False)
-        self.bot.drive_distance(-3000, 400)
+        self.bot.drive_distance(-2200, 400)

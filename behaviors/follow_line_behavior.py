@@ -8,21 +8,21 @@ class FollowLineBehavior:
     Behavior class to drive two powered wheels following a line using the color sensor.
     """
 
-    PROPORTIONAL = -0.7
-    INTEGRAL = -0.05
-    DERIVATIVE = -0.05
+    PROPORTIONAL = 0.4
+    INTEGRAL = 0.05
+    DERIVATIVE = 0.05
     UPDATE_INTERVAL = None
 
-    def __init__(self, bot:DriveBase, color_sensor:ColorSensor, use_left_edge:bool, motor:Motor):
+    def __init__(self, bot:DriveBase, color_sensor:ColorSensor, use_right_edge:bool, motor:Motor):
         self.bot = bot
         self.color_sensor = color_sensor
         self.motor = motor
-        self.max_reflection = 94
-        self.min_reflection = 12
+        self.max_reflection = 91
+        self.min_reflection = 5 #12
 
-        Kp = FollowLineBehavior.PROPORTIONAL if use_left_edge else -FollowLineBehavior.PROPORTIONAL
-        Ki = FollowLineBehavior.INTEGRAL if use_left_edge else -FollowLineBehavior.INTEGRAL
-        Kd = FollowLineBehavior.DERIVATIVE if use_left_edge else -FollowLineBehavior.DERIVATIVE
+        Kp = FollowLineBehavior.PROPORTIONAL if use_right_edge else -FollowLineBehavior.PROPORTIONAL
+        Ki = FollowLineBehavior.INTEGRAL if use_right_edge else -FollowLineBehavior.INTEGRAL
+        Kd = FollowLineBehavior.DERIVATIVE if use_right_edge else -FollowLineBehavior.DERIVATIVE
         self.pid = PID(Kp, Ki, Kd, 0, FollowLineBehavior.UPDATE_INTERVAL)
         self.__configure_pid()
 
@@ -30,7 +30,7 @@ class FollowLineBehavior:
 
     def __configure_pid(self):
         self.pid.setpoint = (self.max_reflection - self.min_reflection) / 2
-        self.pid.output_limits = (-45, 45)
+        self.pid.output_limits = (-40, 40)
         pass
 
     def __at_target(self, distance:int, motor) -> bool:
@@ -54,9 +54,9 @@ class FollowLineBehavior:
             reflection = self.color_sensor.reflection()
             angle = self.pid(reflection)
             if last_angle != angle:
-                self.bot.drive(50, angle)
+                self.bot.drive(100, angle)
                 last_angle = angle
-                print(stop_watch.time(), ' -- reflection:', reflection, ', angle: ', angle, ', error: ', (reflection-self.pid.setpoint))
+                #print(stop_watch.time(), ' -- reflection:', reflection, ', angle: ', angle, ', error: ', (reflection-self.pid.setpoint))
 
     def run(self, until):
         stop_watch = StopWatch()
@@ -68,4 +68,4 @@ class FollowLineBehavior:
             if last_angle != angle:
                 self.bot.drive(50, angle)
                 last_angle = angle
-                print(stop_watch.time(), ' -- reflection:', reflection, ', angle: ', angle, ', error: ', (reflection-self.pid.setpoint))
+                #print(stop_watch.time(), ' -- reflection:', reflection, ', angle: ', angle, ', error: ', (reflection-self.pid.setpoint))

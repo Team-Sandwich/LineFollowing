@@ -3,6 +3,9 @@ from pybricks.tools import print, wait, StopWatch
 from sandwichbot import SandwichBot
 
 class BuildMission():
+    """
+    Class to send tower to red circle.
+    """
     IMAGE_PATH = "assets/build.jpg"
 
     def __init__(self, bot:SandwichBot):
