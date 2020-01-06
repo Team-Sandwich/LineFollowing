@@ -22,7 +22,7 @@ class SwingMission():
 
         # move arm up while driving to swing
         self.bot.attachment_motor.reset_angle(0)
-        self.bot.attachment_motor.run_angle(360*3, -360*3, Stop.BRAKE, False)
+        self.bot.attachment_motor.run_angle(360*3, -900, Stop.BRAKE, False)
 
         # driving to swing
         # self.bot.drive_distance(1647, 200)
@@ -44,8 +44,8 @@ class SwingMission():
         brick.sound.beep()
         brick.sound.beep(1000, 150, 50)
 
-        self.bot.drive_time(-100,50,1200)
-        self.bot.drive_time(-100,-50,1000)
+        self.bot.drive_time(-90,60,1200)
+        self.bot.drive_time(-90,-60,1000)
 
         # self.bot.turn_to(60)
         # self.bot.drive_distance(-300, 120)

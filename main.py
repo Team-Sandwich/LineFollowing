@@ -9,6 +9,7 @@ from missions.build_mission import BuildMission
 from missions.build2_mission import Build2Mission
 from missions.crane_mission import CraneMission
 from missions.swing_mission import SwingMission
+from missions.traffic_mission import TrafficMission
 
 # set up robot
 bot = SandwichBot()
@@ -16,7 +17,7 @@ bot = SandwichBot()
 # Clear the display
 brick.display.clear()
 
-missions = [SwingMission, CraneMission, BuildMission, Build2Mission]
+missions = [TrafficMission, SwingMission, CraneMission, BuildMission, Build2Mission]
 selected_mission_index = 0
 current_mission_index = 0
 brick.display.clear()
