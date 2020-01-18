@@ -34,13 +34,14 @@ class TurnToAngleBehavior:
         ----------
         angle : int – angle to turn (clockwise - positive).
         """
-        if angle < 0:
-            self.pid.tunings = (1, 0, 0)
+
+        # Setup starting values
         stop_watch = StopWatch()
         self.pid.setpoint = angle
         self.gyro_sensor.reset_angle(0)
         last_angle = angle + 100
         last_rotation = 0
+
 
         while not abs(self.pid.setpoint - last_angle) < TurnToAngleBehavior.ACCURACY_ANGLE:
             angle = self.gyro_sensor.angle()

@@ -15,9 +15,9 @@ class BuildMission():
     def run(self):
         brick.sound.beep()
         print("Run Build Mission")
-        self.bot.turn_to(-5)
-        self.bot.drive_distance(1237,100)
+        self.bot.drive_distance(1237,150)
         self.bot.drive_distance(-300,100)
+        self.bot.drive_time(-100,30,1000)
         self.bot.drive_distance(-1600, 400)
 
         
