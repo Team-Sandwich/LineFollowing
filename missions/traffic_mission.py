@@ -16,9 +16,7 @@ class TrafficMission():
     def run(self):
         brick.sound.beep()
         self.bot.attachment_motor.reset_angle(0)
-        self.bot.drive_distance(120, 50)
-        self.bot.drive_distance(200, 100)
-        self.bot.drive_distance(700, 200)
+        self.bot.drive_distance(1000, 200)
         brick.sound.beep(1000,150,50)
 
         # move arm up while driving to swing
@@ -27,10 +25,12 @@ class TrafficMission():
         self.bot.drive_distance(900, 100)
         brick.sound.beep(1000,150,50)
         self.bot.drive_distance(-300, 100)
+
+        # move arm further up for elevator
         self.bot.attachment_motor.run_angle(360*3, -600, Stop.BRAKE, False)
+
+        # head to elevator and side chop
         self.bot.turn_to(-70)
         self.bot.drive_distance(750, 100)
         self.bot.drive_time(-300,300,500)
-        #self.bot.drive_distance(-1000, 300)
-        # self.bot.follow_line_distance(True, 800)
         brick.sound.beep(1000,150,50)

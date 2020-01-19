@@ -15,13 +15,21 @@ class Build2Mission():
 
     def run(self):
         brick.sound.beep()
+
+        # Push buildings out to black circle
         self.bot.drive_distance(900, 100)
         self.bot.drive_distance(-200, 100)
+
+        # lower arm to trigger crane
         self.bot.attachment_motor.run_angle(360*3, 1500, Stop.BRAKE, False)
+
+        # drive to crane and lift arm
         self.bot.turn_to(25)
         self.bot.drive_distance(220, 100)
         self.bot.attachment_motor.run_angle(360*3, -1000, Stop.BRAKE, True)
         self.bot.attachment_motor.run_angle(360*3, 1000, Stop.BRAKE, False)
+
         self.bot.drive_time(-200,90,1000)
         brick.sound.beep(1000,150,50)
+        self.bot.attachment_motor.run_angle(360*3, -1500, Stop.BRAKE, False)
         self.bot.drive_distance(-1000, 200)

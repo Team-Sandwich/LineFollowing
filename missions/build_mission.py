@@ -4,7 +4,7 @@ from sandwichbot import SandwichBot
 
 class BuildMission():
     """
-    Class to send tower to red circle.
+    Class to send buildings to red circle.
     """
     IMAGE_PATH = "assets/build.jpg"
 
